@@ -12,7 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MobileAdvApp">
         <activity
+<<<<<<< HEAD
             android:name=".ui.MainActivity"
+=======
+            android:name=".ui.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+>>>>>>> f64004b669bd371c38f9a8f7c406ab0252a0c10b
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
