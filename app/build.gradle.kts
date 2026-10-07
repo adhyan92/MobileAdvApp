@@ -17,7 +17,7 @@ plugins {
 //aplikasi. Menentukan ketersediaan API Android modern yang dapat digunakan dalam kode.
 android {
     namespace = "com.example.mobileadvapp"
-    compileSdk = 35
+    compileSdk = 36
 
 //Blok `defaultConfig`: Mengatur atribut dasar aplikasi seperti `applicationId` (ID unik aplikasi di
 //Google Play Store), `minSdk` (versi Android minimum yang didukung), `targetSdk` (versi Android
@@ -67,6 +67,7 @@ android {
 //langsung di atas perangkat fisik atau emulator Android.
 dependencies {
 
+    implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
