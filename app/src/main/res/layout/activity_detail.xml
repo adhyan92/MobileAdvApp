@@ -5,37 +5,34 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.DetailActivity">
 
     <TextView
-        android:id="@+id/tvCounter"
+        android:id="@+id/tvDetailInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ViewBinding belum dicek"
+        android:text="Detail"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.421" />
-
-    <Button
-        android:id="@+id/btnIncrement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Cek Konfigurasi"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCounter" />
-
-    <Button
-        android:id="@+id/btnOpenDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Buka Detail"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        android:id="@+id/btnCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telepon"
+        app:layout_constraintTop_toBottomOf="@id/btnOpenDetail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnMaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loaksi kampus"
+        app:layout_constraintTop_toBottomOf="@id/btnCall"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
