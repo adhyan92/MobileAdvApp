@@ -65,6 +65,7 @@
         android:name="com.example.mobileadvapp.ui.CartFragment"
         android:label="Keranjang"
         tools:layout="@layout/fragment_cart">
+
         <argument
             android:name="productName"
             app:argType="string" />
@@ -72,6 +73,7 @@
             android:name="quantity"
             app:argType="integer"
             android:defaultValue="1" />
+
         <action
             android:id="@+id/action_cartFragment_to_categoryFragment"
             app:destination="@id/categoryFragment"
