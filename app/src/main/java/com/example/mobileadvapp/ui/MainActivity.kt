@@ -1,10 +1,14 @@
 package com.example.mobileadvapp.ui
 
-import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.mobileadvapp.R
+
+/* ===================== KODE LAMA (DIKOMENTARI) =====================
+
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.mobileadvapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -78,5 +82,18 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         outState.putInt("KEY_COUNTER", counter)
         Log.d(TAG, "onSaveInstanceState Dipanggil - Counter Disimpan: $counter")
+    }
+}
+
+=================== AKHIR KODE LAMA =================== */
+
+
+// ===================== KODE BARU (Praktikum Navigation) =====================
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Menampilkan layout yang berisi NavHostFragment (Login -> Category -> ProductDetail -> Cart)
+        setContentView(R.layout.activity_navigation)
     }
 }

@@ -8,6 +8,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 //`namespace`: Menentukan package name unik untuk kelas R dan Manifest yang dihasilkan
@@ -52,8 +53,10 @@ android {
 //Blok `buildFeatures`: Mengaktifkan atau menonaktifkan fitur khusus platform Android. Mengatur
 //`viewBinding = true` akan merintis generasi otomatis kelas binding untuk tiap berkas XML layout
 //secara type-safe dan null-safe.
-    buildFeatures {
-        viewBinding = true
+    android {
+        buildFeatures {
+            viewBinding = true
+        }
     }
 }
 
@@ -73,6 +76,11 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    // Navigation Component
+
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.0")
 
 
     // Testing Libraries
