@@ -1,28 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Keranjang Belanja"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/btnCheckout"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Checkout (Selesaikan Transaksi)" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:padding="24dp">
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:alpha="0.25"
+            android:contentDescription="Logo Manajemen Informatika"
+            android:src="@drawable/logo_mi" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="24dp">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:contentDescription="Logo Universitas Amikom Yogyakarta"
+                android:src="@drawable/logo_amikom" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Universitas Amikom Yogyakarta"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="#14FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#CAC4D0"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Keranjang Belanja"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:shrinkColumns="2">
+
+                    <TableRow>
+                        <TextView
+                            android:text="Nama Produk"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:text=":"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/tvNamaProduk"
+                            android:textSize="16sp" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="Jumlah"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:text=":"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/tvJumlah"
+                            android:textSize="16sp" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:text="Harga per Unit"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:text=":"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/tvHargaSatuan"
+                            android:textSize="16sp" />
+                    </TableRow>
+
+                    <TableRow android:layout_marginTop="12dp">
+                        <TextView
+                            android:text="Total Estimasi Harga"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:text=":"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/tvTotal"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </TableRow>
+                </TableLayout>
+
+                <Button
+                    android:id="@+id/btnCheckout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Checkout (Selesaikan Transaksi)" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+</FrameLayout>

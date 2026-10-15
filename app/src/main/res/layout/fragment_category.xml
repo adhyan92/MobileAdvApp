@@ -1,21 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kategori Produk"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/btnPilihProduk"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Pilih Produk (Laptop Gaming)" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:padding="24dp">
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:alpha="0.25"
+            android:contentDescription="Logo Manajemen Informatika"
+            android:src="@drawable/logo_mi" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="24dp">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:contentDescription="Logo Universitas Amikom Yogyakarta"
+                android:src="@drawable/logo_amikom" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Universitas Amikom Yogyakarta"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="#14FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#CAC4D0"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kategori Produk"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/layoutHeaderProduk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_dropdown"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/tvPilihProduk"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Pilih Produk"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvArrow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▼"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnLanjut"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:enabled="false"
+                        android:text="Lanjut" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutKategori"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_dropdown"
+                        android:elevation="8dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/itemLaptop"
+                            style="@style/DropdownItem"
+                            android:text="Laptop Gaming" />
+
+                        <TextView
+                            android:id="@+id/itemMouse"
+                            style="@style/DropdownItem"
+                            android:text="Mouse Gaming" />
+
+                        <TextView
+                            android:id="@+id/itemKeyboard"
+                            style="@style/DropdownItem"
+                            android:text="Keyboard Mechanical" />
+
+                        <TextView
+                            android:id="@+id/itemHeadset"
+                            style="@style/DropdownItem"
+                            android:text="Headset Gaming" />
+
+                        <TextView
+                            android:id="@+id/itemMonitor"
+                            style="@style/DropdownItem"
+                            android:text="Monitor" />
+
+                        <TextView
+                            android:id="@+id/itemMousepad"
+                            style="@style/DropdownItem"
+                            android:text="Mousepad" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+</FrameLayout>
