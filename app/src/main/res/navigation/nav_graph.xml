@@ -3,33 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/homeLoginFragment">
 
+    <!-- BARU: layar awal (judul + tombol Login / Masuk) -->
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.mobileadvapp.ui.HomeFragment"
-        android:label="Home Fragment"
-        tools:layout="@layout/fragment_home">
+        android:id="@+id/homeLoginFragment"
+        android:name="com.example.mobileadvapp.ui.HomeLoginFragment"
+        android:label="Home Login"
+        tools:layout="@layout/fragment_home_login">
         <action
-            android:id="@+id/action_homeFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            android:id="@+id/action_homeLoginFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeLoginFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment"
+            app:popUpTo="@id/homeLoginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
-    <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.example.mobileadvapp.ui.DetailFragment"
-        android:label="Detail Fragment"
-        tools:layout="@layout/fragment_detail">
-        <argument
-            android:name="username"
-            app:argType="string"
-            android:defaultValue="Guest" />
-        <argument
-            android:name="userScore"
-            app:argType="integer"
-            android:defaultValue="0" />
-    </fragment>
-
+    <!-- DIUBAH: popUpTo ditambahkan ke action menuju category -->
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.mobileadvapp.ui.LoginFragment"
@@ -37,7 +29,9 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/categoryFragment"
+            app:popUpTo="@id/homeLoginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

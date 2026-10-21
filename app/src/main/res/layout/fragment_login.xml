@@ -77,6 +77,14 @@
                     android:hint="Username"
                     android:inputType="text" />
 
+                <EditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="Password"
+                    android:inputType="textPassword" />
+
                 <Button
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
