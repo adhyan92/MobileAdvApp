@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.mobileadvapp.R
 import com.example.mobileadvapp.data.local.SettingPreferences
 import com.example.mobileadvapp.data.local.dataStore
 import com.example.mobileadvapp.databinding.HomeScreenBinding
+import kotlinx.coroutines.launch
 
 class HomeScreen : Fragment() {
 
@@ -43,18 +45,26 @@ class HomeScreen : Fragment() {
 
         // Tombol Pengaturan Tema -> Navigasi ke Layar Pengaturan Tema
         binding.btnTema.setOnClickListener {
-            findNavController().navigate(R.id.action_homeScreen_to_themeSettingFragment)
+            if (findNavController().currentDestination?.id == R.id.homeScreen) {
+                findNavController().navigate(R.id.action_homeScreen_to_themeSettingFragment)
+            }
         }
 
         // Tombol Lihat Kategori Produk
         binding.btnKategori.setOnClickListener {
-            findNavController().navigate(R.id.action_homeScreen_to_categoryFragment)
+            if (findNavController().currentDestination?.id == R.id.homeScreen) {
+                findNavController().navigate(R.id.action_homeScreen_to_categoryFragment)
+            }
         }
 
-        // Tombol Logout & Hapus Sesi -> kembali ke Home Login
+        // Tombol Logout & Hapus Sesi -> tunggu hapus sesi selesai baru pindah ke Home Login
         binding.btnLogout.setOnClickListener {
-            settingViewModel.clearUserSession()
-            findNavController().navigate(R.id.action_homeScreen_to_homeLoginFragment)
+            viewLifecycleOwner.lifecycleScope.launch {
+                pref.clearUserSession()
+                if (isAdded && findNavController().currentDestination?.id == R.id.homeScreen) {
+                    findNavController().navigate(R.id.action_homeScreen_to_homeLoginFragment)
+                }
+            }
         }
     }
 

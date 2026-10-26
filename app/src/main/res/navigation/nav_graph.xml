@@ -15,6 +15,12 @@
         <action
             android:id="@+id/action_homeLoginFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <!-- Aksi Auto-Login menuju ke Main/Home Screen -->
+        <action
+            android:id="@+id/action_homeLoginFragment_to_homeScreen"
+            app:destination="@id/homeScreen"
+            app:popUpTo="@id/homeLoginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <!-- 2. Layar Kedua: fragment_login.xml (Form Login) -->
@@ -53,9 +59,9 @@
     <!-- 4. Layar Pengaturan Tema -->
     <fragment
         android:id="@+id/themeSettingFragment"
-        android:name="com.example.mobileadvapp.ui.ThemeSettingFragment"
+        android:name="com.example.mobileadvapp.ui.SettingsActivity"
         android:label="Pengaturan Tampilan"
-        tools:layout="@layout/fragment_theme_setting" />
+        tools:layout="@layout/settings_activity" />
 
     <!-- Fragment Tambahan -->
     <fragment

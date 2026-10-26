@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.mobileadvapp.R
 import com.example.mobileadvapp.data.local.SettingPreferences
 import com.example.mobileadvapp.data.local.dataStore
 import com.example.mobileadvapp.databinding.FragmentLoginBinding
+import kotlinx.coroutines.launch
 import java.util.UUID
 
 class LoginFragment : Fragment() {
@@ -31,10 +32,8 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
-        val settingViewModel = ViewModelProvider(requireActivity(), ViewModelFactory(pref))
-            .get(SettingViewModel::class.java)
 
-        // Tombol login: simpan username & token acak lalu navigasi dari fragment_login.xml ke home_screen.xml
+        // Tombol login: simpan username & token acak lalu navigasi ke home_screen.xml setelah simpan selesai
         binding.btnLogin.setOnClickListener {
             val username = binding.edtUsername.text.toString().trim()
             val password = binding.edtPassword.text.toString().trim()
@@ -51,12 +50,15 @@ class LoginFragment : Fragment() {
             // Membuat token acak unik setiap kali pengguna melakukan login
             val randomToken = "token_" + UUID.randomUUID().toString().replace("-", "").take(12)
 
-            // Simpan sesi login (token acak dan username) ke DataStore Preferences
-            settingViewModel.saveUserSession(randomToken, username)
-            Toast.makeText(requireContext(), "Login berhasil!", Toast.LENGTH_SHORT).show()
+            viewLifecycleOwner.lifecycleScope.launch {
+                // Tunggu proses simpan ke DataStore selesai terlebih dahulu
+                pref.saveUserSession(randomToken, username)
+                Toast.makeText(requireContext(), "Login berhasil!", Toast.LENGTH_SHORT).show()
 
-            // Navigasi ke home_screen.xml
-            goToHomeScreen()
+                if (isAdded && findNavController().currentDestination?.id == R.id.loginFragment) {
+                    goToHomeScreen()
+                }
+            }
         }
     }
 
