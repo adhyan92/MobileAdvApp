@@ -3,8 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/homeLoginFragment">
 
+    <!-- 1. Layar Pertama: home_login.xml -->
+    <fragment
+        android:id="@+id/homeLoginFragment"
+        android:name="com.example.mobileadvapp.ui.HomeLoginFragment"
+        android:label="Home Login"
+        tools:layout="@layout/home_login">
+        <!-- Aksi menuju ke form fragment_login.xml -->
+        <action
+            android:id="@+id/action_homeLoginFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <!-- 2. Layar Kedua: fragment_login.xml (Form Login) -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.mobileadvapp.ui.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <!-- Aksi menuju ke home_screen.xml -->
+        <action
+            android:id="@+id/action_loginFragment_to_homeScreen"
+            app:destination="@id/homeScreen"
+            app:popUpTo="@id/homeLoginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- 3. Layar Ketiga: home_screen.xml (Home Screen Utama) -->
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="com.example.mobileadvapp.ui.HomeScreen"
+        android:label="Home Screen"
+        tools:layout="@layout/home_screen">
+        <action
+            android:id="@+id/action_homeScreen_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_homeScreen_to_themeSettingFragment"
+            app:destination="@id/themeSettingFragment" />
+        <action
+            android:id="@+id/action_homeScreen_to_homeLoginFragment"
+            app:destination="@id/homeLoginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- 4. Layar Pengaturan Tema -->
+    <fragment
+        android:id="@+id/themeSettingFragment"
+        android:name="com.example.mobileadvapp.ui.ThemeSettingFragment"
+        android:label="Pengaturan Tampilan"
+        tools:layout="@layout/fragment_theme_setting" />
+
+    <!-- Fragment Tambahan -->
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.mobileadvapp.ui.HomeFragment"
@@ -28,16 +81,6 @@
             android:name="userScore"
             app:argType="integer"
             android:defaultValue="0" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.mobileadvapp.ui.LoginFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
     </fragment>
 
     <fragment

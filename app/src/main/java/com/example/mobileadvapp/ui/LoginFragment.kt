@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.mobileadvapp.R
 import com.example.mobileadvapp.data.local.SettingPreferences
 import com.example.mobileadvapp.data.local.dataStore
 import com.example.mobileadvapp.databinding.FragmentLoginBinding
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
+import java.util.UUID
 
 class LoginFragment : Fragment() {
 
@@ -36,15 +34,7 @@ class LoginFragment : Fragment() {
         val settingViewModel = ViewModelProvider(requireActivity(), ViewModelFactory(pref))
             .get(SettingViewModel::class.java)
 
-        // Auto-login: cek token satu kali saat layar dibuka
-        viewLifecycleOwner.lifecycleScope.launch {
-            val (token, _) = pref.getUserSession().first()
-            if (token.isNotEmpty()) {
-                goToCategory()
-            }
-        }
-
-        // Tombol login simulasi
+        // Tombol login: simpan username & token acak lalu navigasi dari fragment_login.xml ke home_screen.xml
         binding.btnLogin.setOnClickListener {
             val username = binding.edtUsername.text.toString().trim()
             val password = binding.edtPassword.text.toString().trim()
@@ -58,13 +48,20 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            settingViewModel.saveUserSession("token_abc123xyz", username)
-            goToCategory()
+            // Membuat token acak unik setiap kali pengguna melakukan login
+            val randomToken = "token_" + UUID.randomUUID().toString().replace("-", "").take(12)
+
+            // Simpan sesi login (token acak dan username) ke DataStore Preferences
+            settingViewModel.saveUserSession(randomToken, username)
+            Toast.makeText(requireContext(), "Login berhasil!", Toast.LENGTH_SHORT).show()
+
+            // Navigasi ke home_screen.xml
+            goToHomeScreen()
         }
     }
 
-    private fun goToCategory() {
-        findNavController().navigate(R.id.action_loginFragment_to_categoryFragment)
+    private fun goToHomeScreen() {
+        findNavController().navigate(R.id.action_loginFragment_to_homeScreen)
     }
 
     override fun onDestroyView() {
