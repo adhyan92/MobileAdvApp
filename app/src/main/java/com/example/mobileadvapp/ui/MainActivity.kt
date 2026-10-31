@@ -1,12 +1,18 @@
 package com.example.mobileadvapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.mobileadvapp.R
+import com.example.mobileadvapp.data.local.AppDatabase
+import com.example.mobileadvapp.data.local.Course
 import com.example.mobileadvapp.data.local.dataStore
 import com.example.mobileadvapp.data.local.SettingPreferences
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /* ===================== KODE LAMA (DIKOMENTARI) =====================
 
@@ -109,6 +115,22 @@ class MainActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val db = AppDatabase.getDatabase(applicationContext)
+                db.courseDao().insertCourse(
+                    Course(
+                        courseCode = "IF123",
+                        courseName = "Pemrograman Mobile Lanjut",
+                        credits = 4,
+                        lecturerName = "Tim Dosen"
+                    )
+                )
+            } catch (e: Exception) {
+                Log.e("DB_TEST", "Gagal insert data uji", e)
             }
         }
     }

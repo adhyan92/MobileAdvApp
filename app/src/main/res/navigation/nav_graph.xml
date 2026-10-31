@@ -59,9 +59,9 @@
     <!-- 4. Layar Pengaturan Tema -->
     <fragment
         android:id="@+id/themeSettingFragment"
-        android:name="com.example.mobileadvapp.ui.SettingsActivity"
+        android:name="com.example.mobileadvapp.ui.ThemeSettingFragment"
         android:label="Pengaturan Tampilan"
-        tools:layout="@layout/settings_activity" />
+        tools:layout="@layout/fragment_theme_setting" />
 
     <!-- Fragment Tambahan -->
     <fragment
