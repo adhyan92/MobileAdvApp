@@ -1,5 +1,6 @@
 package com.example.mobileadvapp.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,27 +38,36 @@ class HomeScreen : Fragment() {
             ViewModelFactory(pref)
         )[SettingViewModel::class.java]
 
-        // Menampilkan data sesi pengguna (nama & token) secara dinamis
         settingViewModel.getUserSession().observe(viewLifecycleOwner) { (token, name) ->
             binding.tvWelcome.text = if (name.isNotEmpty()) "Selamat Datang, $name!" else "Selamat Datang!"
             binding.tvToken.text = if (token.isNotEmpty()) "Token Sesi: $token" else "Token Sesi: Tidak ada"
         }
 
-        // Tombol Pengaturan Tema -> Navigasi ke Layar Pengaturan Tema
-        binding.btnTema.setOnClickListener {
-            if (findNavController().currentDestination?.id == R.id.homeScreen) {
-                findNavController().navigate(R.id.action_homeScreen_to_themeSettingFragment)
-            }
-        }
-
-        // Tombol Lihat Kategori Produk
+        // Lihat Kategori Produk
         binding.btnKategori.setOnClickListener {
             if (findNavController().currentDestination?.id == R.id.homeScreen) {
                 findNavController().navigate(R.id.action_homeScreen_to_categoryFragment)
             }
         }
 
-        // Tombol Logout & Hapus Sesi -> tunggu hapus sesi selesai baru pindah ke Home Login
+        // Kelola Mata Kuliah (Room DB) -> CourseActivity
+        binding.btnMataKuliah.setOnClickListener {
+            startActivity(Intent(requireContext(), CourseActivity::class.java))
+        }
+
+        // Kelola Mahasiswa (Room DB) -> StudentActivity
+        binding.btnMahasiswa.setOnClickListener {
+            startActivity(Intent(requireContext(), StudentActivity::class.java))
+        }
+
+        // Pengaturan Tema
+        binding.btnTema.setOnClickListener {
+            if (findNavController().currentDestination?.id == R.id.homeScreen) {
+                findNavController().navigate(R.id.action_homeScreen_to_themeSettingFragment)
+            }
+        }
+
+        // Logout & Hapus Sesi
         binding.btnLogout.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 pref.clearUserSession()
@@ -74,5 +84,4 @@ class HomeScreen : Fragment() {
     }
 }
 
-// Alias class untuk fleksibilitas pemanggilan nama HomeScreenFragment
 typealias HomeScreenFragment = HomeScreen

@@ -24,6 +24,14 @@
             android:name=".ui.DetailActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.StudentActivity"
+            android:exported="false"
+            android:label="Form Input Mahasiswa" />
+        <activity
+            android:name=".ui.CourseActivity"
+            android:exported="false"
+            android:label="Form Input Mata Kuliah" />
     </application>
 
 </manifest>

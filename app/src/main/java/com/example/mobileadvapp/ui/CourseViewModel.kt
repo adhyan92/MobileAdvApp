@@ -1,29 +1,33 @@
 package com.example.mobileadvapp.ui
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mobileadvapp.data.local.AppDatabase
 import com.example.mobileadvapp.data.local.Course
+import com.example.mobileadvapp.data.local.CourseDao
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class CourseViewModel(app: Application) : AndroidViewModel(app) {
+class CourseViewModel(private val courseDao: CourseDao) : ViewModel() {
 
-    private val dao = AppDatabase.getDatabase(app).courseDao()
+    val allCourses: StateFlow<List<Course>> = courseDao.getAllCourses()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
 
-    val courses: StateFlow<List<Course>> = dao.getAllCourses()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
-
-    fun save(course: Course) {
+    fun insertCourse(code: String, name: String, credits: Int, lecturer: String) {
         viewModelScope.launch {
-            if (course.id == 0) dao.insertCourse(course) else dao.updateCourse(course)
+            courseDao.insertCourse(
+                Course(
+                    courseCode = code,
+                    courseName = name,
+                    credits = credits,
+                    lecturerName = lecturer
+                )
+            )
         }
-    }
-
-    fun delete(course: Course) {
-        viewModelScope.launch { dao.deleteCourse(course) }
     }
 }
