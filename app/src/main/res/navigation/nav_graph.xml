@@ -11,7 +11,7 @@
         android:name="com.example.mobileadvapp.ui.HomeLoginFragment"
         android:label="Home Login"
         tools:layout="@layout/home_login">
-        <!-- Aksi menuju ke form fragment_login.xml -->
+        <!-- Aksi menuju ke form login_home.xml -->
         <action
             android:id="@+id/action_homeLoginFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -23,12 +23,12 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-    <!-- 2. Layar Kedua: fragment_login.xml (Form Login) -->
+    <!-- 2. Layar Kedua: login_home.xml (Form Login) -->
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.mobileadvapp.ui.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/fragment_login">
+        tools:layout="@layout/login_home">
         <!-- Aksi menuju ke home_screen.xml -->
         <action
             android:id="@+id/action_loginFragment_to_homeScreen"
@@ -63,32 +63,7 @@
         android:label="Pengaturan Tampilan"
         tools:layout="@layout/fragment_theme_setting" />
 
-    <!-- Fragment Tambahan -->
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.mobileadvapp.ui.HomeFragment"
-        android:label="Home Fragment"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_homeFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.example.mobileadvapp.ui.DetailFragment"
-        android:label="Detail Fragment"
-        tools:layout="@layout/fragment_detail">
-        <argument
-            android:name="username"
-            app:argType="string"
-            android:defaultValue="Guest" />
-        <argument
-            android:name="userScore"
-            app:argType="integer"
-            android:defaultValue="0" />
-    </fragment>
-
+    <!-- 5. Layar Kategori Produk -->
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.mobileadvapp.ui.CategoryFragment"
@@ -99,6 +74,7 @@
             app:destination="@id/productDetailFragment" />
     </fragment>
 
+    <!-- 6. Layar Detail Produk -->
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.mobileadvapp.ui.ProductDetailFragment"
@@ -109,6 +85,7 @@
             app:destination="@id/cartFragment" />
     </fragment>
 
+    <!-- 7. Layar Keranjang -->
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.mobileadvapp.ui.CartFragment"

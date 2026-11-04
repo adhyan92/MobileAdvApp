@@ -16,20 +16,33 @@ class CourseActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCourseBinding
     private lateinit var courseViewModel: CourseViewModel
-    private val adapter = CourseAdapter()
+    private lateinit var adapter: CourseAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCourseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.rvCourses.layoutManager = LinearLayoutManager(this)
-        binding.rvCourses.adapter = adapter
-
         // Inisialisasi ViewModel lewat Factory
         val dao = AppDatabase.getDatabase(this).courseDao()
         val factory = CourseViewModelFactory(dao)
         courseViewModel = ViewModelProvider(this, factory)[CourseViewModel::class.java]
+
+        adapter = CourseAdapter(
+            onDeleteClick = { course ->
+                courseViewModel.deleteCourse(course)
+                Toast.makeText(this, "Mata Kuliah Dihapus", Toast.LENGTH_SHORT).show()
+            }
+        )
+
+        binding.rvCourses.layoutManager = LinearLayoutManager(this)
+        binding.rvCourses.adapter = adapter
+
+        // Tombol Hapus Semua Data Mata Kuliah
+        binding.btnClearAll.setOnClickListener {
+            courseViewModel.deleteAllCourses()
+            Toast.makeText(this, "Semua Data Mata Kuliah Dihapus", Toast.LENGTH_SHORT).show()
+        }
 
         // Amati StateFlow allCourses
         lifecycleScope.launch {

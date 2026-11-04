@@ -11,20 +11,20 @@ import androidx.navigation.fragment.findNavController
 import com.example.mobileadvapp.R
 import com.example.mobileadvapp.data.local.SettingPreferences
 import com.example.mobileadvapp.data.local.dataStore
-import com.example.mobileadvapp.databinding.FragmentLoginBinding
+import com.example.mobileadvapp.databinding.LoginHomeBinding
 import kotlinx.coroutines.launch
 import java.util.UUID
 
 class LoginFragment : Fragment() {
 
-    private var _binding: FragmentLoginBinding? = null
+    private var _binding: LoginHomeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = LoginHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 

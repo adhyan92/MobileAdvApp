@@ -13,7 +13,7 @@ interface CourseDao {
     @Insert
     suspend fun insertCourse(course: Course)
 
-    @Query("SELECT * FROM courses ORDER BY course_name ASC")
+    @Query("SELECT * FROM courses ORDER BY id DESC")
     fun getAllCourses(): Flow<List<Course>>
 
     @Query("SELECT * FROM courses WHERE credits >= :minCredits")
@@ -24,4 +24,7 @@ interface CourseDao {
 
     @Delete
     suspend fun deleteCourse(course: Course)
+
+    @Query("DELETE FROM courses")
+    suspend fun deleteAllCourses()
 }

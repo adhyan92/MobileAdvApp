@@ -16,21 +16,34 @@ class StudentActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStudentBinding
     private lateinit var studentViewModel: StudentViewModel
-    private val adapter = StudentAdapter()
+    private lateinit var adapter: StudentAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStudentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Pasang adapter ke RecyclerView
-        binding.rvStudents.layoutManager = LinearLayoutManager(this)
-        binding.rvStudents.adapter = adapter
-
         // 1. Inisialisasi ViewModel menggunakan Factory
         val dao = AppDatabase.getDatabase(this).studentDao()
         val factory = StudentViewModelFactory(dao)
         studentViewModel = ViewModelProvider(this, factory)[StudentViewModel::class.java]
+
+        adapter = StudentAdapter(
+            onDeleteClick = { student ->
+                studentViewModel.deleteStudent(student)
+                Toast.makeText(this, "Data Mahasiswa Dihapus", Toast.LENGTH_SHORT).show()
+            }
+        )
+
+        // Pasang adapter ke RecyclerView
+        binding.rvStudents.layoutManager = LinearLayoutManager(this)
+        binding.rvStudents.adapter = adapter
+
+        // Tombol Hapus Semua Data Mahasiswa
+        binding.btnClearAll.setOnClickListener {
+            studentViewModel.deleteAllStudents()
+            Toast.makeText(this, "Semua Data Mahasiswa Dihapus", Toast.LENGTH_SHORT).show()
+        }
 
         // 2. Mengamati aliran data StateFlow dari ViewModel
         lifecycleScope.launch {
@@ -52,6 +65,8 @@ class StudentActivity : AppCompatActivity() {
                 binding.edtName.text.clear()
                 binding.edtNim.text.clear()
                 binding.edtProgram.text.clear()
+            } else {
+                Toast.makeText(this, "Lengkapi semua data wajib", Toast.LENGTH_SHORT).show()
             }
         }
     }

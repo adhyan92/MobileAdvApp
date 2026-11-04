@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+
 class StudentViewModel(private val studentDao: StudentDao) : ViewModel() {
 
     val allStudents: StateFlow<List<Student>> = studentDao.getAllStudents()
@@ -16,6 +17,7 @@ class StudentViewModel(private val studentDao: StudentDao) : ViewModel() {
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )
+
     fun insertStudent(name: String, nim: String, program: String) {
         viewModelScope.launch {
             studentDao.insertStudent(
@@ -25,6 +27,18 @@ class StudentViewModel(private val studentDao: StudentDao) : ViewModel() {
                     studyProgram = program
                 )
             )
+        }
+    }
+
+    fun deleteStudent(student: Student) {
+        viewModelScope.launch {
+            studentDao.deleteStudent(student)
+        }
+    }
+
+    fun deleteAllStudents() {
+        viewModelScope.launch {
+            studentDao.deleteAllStudents()
         }
     }
 }

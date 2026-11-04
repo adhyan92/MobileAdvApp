@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileadvapp.data.local.Course
 import com.example.mobileadvapp.databinding.ItemCourseBinding
 
-class CourseAdapter : ListAdapter<Course, CourseAdapter.CourseViewHolder>(DIFF) {
+class CourseAdapter(
+    private val onDeleteClick: ((Course) -> Unit)? = null
+) : ListAdapter<Course, CourseAdapter.CourseViewHolder>(DIFF) {
 
     class CourseViewHolder(val binding: ItemCourseBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -24,8 +26,10 @@ class CourseAdapter : ListAdapter<Course, CourseAdapter.CourseViewHolder>(DIFF) 
         holder.binding.tvCode.text = course.courseCode
         holder.binding.tvCredits.text = "SKS: ${course.credits}"
         holder.binding.tvLecturer.text = "Dosen: ${course.lecturerName}"
+        holder.binding.btnDeleteCourse.setOnClickListener {
+            onDeleteClick?.invoke(course)
+        }
     }
-
 
     companion object {
         val DIFF = object : DiffUtil.ItemCallback<Course>() {

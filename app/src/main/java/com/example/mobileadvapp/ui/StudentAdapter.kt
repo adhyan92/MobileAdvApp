@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobileadvapp.data.local.Student
 import com.example.mobileadvapp.databinding.ItemStudentBinding
 
-class StudentAdapter : ListAdapter<Student, StudentAdapter.StudentViewHolder>(DIFF) {
+class StudentAdapter(
+    private val onDeleteClick: ((Student) -> Unit)? = null
+) : ListAdapter<Student, StudentAdapter.StudentViewHolder>(DIFF) {
 
     class StudentViewHolder(val binding: ItemStudentBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -23,6 +25,9 @@ class StudentAdapter : ListAdapter<Student, StudentAdapter.StudentViewHolder>(DI
         holder.binding.tvName.text = student.name
         holder.binding.tvNim.text = "NIM: ${student.nim}"
         holder.binding.tvProgram.text = "Program Studi: ${student.studyProgram}"
+        holder.binding.btnDeleteStudent.setOnClickListener {
+            onDeleteClick?.invoke(student)
+        }
     }
 
     companion object {

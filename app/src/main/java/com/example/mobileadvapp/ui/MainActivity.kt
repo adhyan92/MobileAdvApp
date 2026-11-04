@@ -1,109 +1,17 @@
 package com.example.mobileadvapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.mobileadvapp.R
-import com.example.mobileadvapp.data.local.AppDatabase
-import com.example.mobileadvapp.data.local.Course
-import com.example.mobileadvapp.data.local.dataStore
 import com.example.mobileadvapp.data.local.SettingPreferences
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.mobileadvapp.data.local.dataStore
 
-/* ===================== KODE LAMA (DIKOMENTARI) =====================
-
-import android.content.Intent
-import android.util.Log
-import android.widget.Toast
-import com.example.mobileadvapp.databinding.ActivityMainBinding
-
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
-    private var counter = 0
-    private val TAG = "LifecycleApp"
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        Log.d(TAG, "onCreate Dipanggil")
-
-        if (savedInstanceState != null) {
-            counter = savedInstanceState.getInt("KEY_COUNTER", 0)
-        }
-        binding.tvCounter.text = counter.toString()
-
-        binding.btnIncrement.setOnClickListener {
-            counter++
-            binding.tvCounter.text = counter.toString()
-        }
-
-        binding.btnOpenDetail.setOnClickListener {
-            val nama = binding.etName.text.toString().trim()
-            val nim = binding.etNim.text.toString().trim()
-            val prodi = binding.etProdi.text.toString().trim()
-
-            if (nama.isEmpty() || nim.isEmpty() || prodi.isEmpty()) {
-                Toast.makeText(this, "Semua data wajib diisi", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val intent = Intent(this, DetailActivity::class.java).apply {
-                putExtra(DetailActivity.EXTRA_NAME, nama)
-                putExtra(DetailActivity.EXTRA_NIM, nim)
-                putExtra(DetailActivity.EXTRA_PRODI, prodi)
-                putExtra(DetailActivity.EXTRA_SCORE, counter)
-            }
-            startActivity(intent)
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart Dipanggil")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume Dipanggil")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause Dipanggil")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "onStop Dipanggil")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "onDestroy Dipanggil")
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt("KEY_COUNTER", counter)
-        Log.d(TAG, "onSaveInstanceState Dipanggil - Counter Disimpan: $counter")
-    }
-}
-
-=================== AKHIR KODE LAMA =================== */
-
-
-// ===================== KODE BARU (Praktikum Navigation) =====================
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Menampilkan layout yang berisi NavHostFragment (Login -> Category -> ProductDetail -> Cart)
         setContentView(R.layout.activity_navigation)
 
         val pref = SettingPreferences.getInstance(application.dataStore)
@@ -115,22 +23,6 @@ class MainActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-        }
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                val db = AppDatabase.getDatabase(applicationContext)
-                db.courseDao().insertCourse(
-                    Course(
-                        courseCode = "IF123",
-                        courseName = "Pemrograman Mobile Lanjut",
-                        credits = 4,
-                        lecturerName = "Tim Dosen"
-                    )
-                )
-            } catch (e: Exception) {
-                Log.e("DB_TEST", "Gagal insert data uji", e)
             }
         }
     }
